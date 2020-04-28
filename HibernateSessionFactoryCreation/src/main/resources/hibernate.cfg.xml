@@ -12,7 +12,7 @@
         <property name="connection.username">root</property>  
         <property name="connection.password">vijay123</property>  
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="com.infotech.entities.Employee"/>
     </session-factory>  
   

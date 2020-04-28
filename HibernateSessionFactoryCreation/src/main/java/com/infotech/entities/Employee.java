@@ -3,10 +3,12 @@ package com.infotech.entities;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -18,7 +20,8 @@ public class Employee {
 
 	@Id
 	@Column(name="employee_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "empid_generator")
+	@SequenceGenerator(name = "empid_generator",initialValue = 2,allocationSize = 10,sequenceName = "emp_id")
 	private Integer employeeId;
 	
 	@Column(name="employee_name",nullable = false)
@@ -29,6 +32,9 @@ public class Employee {
 	
 	@Column(name="employee_doj")
 	private Date doj;
+	
+	@Embedded
+	private Address address;
 	
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -74,6 +80,17 @@ public class Employee {
 	private double salary;
 
 	public Employee() {
+	}
+
+	
+	
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override
