@@ -14,6 +14,7 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="com.infotech.entities.Employee"/>
+         <mapping class="com.infotech.entities.Address"/>
     </session-factory>  
   
 </hibernate-configuration>  

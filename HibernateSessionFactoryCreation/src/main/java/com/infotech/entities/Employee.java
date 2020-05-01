@@ -1,14 +1,18 @@
 package com.infotech.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,8 +24,7 @@ public class Employee {
 
 	@Id
 	@Column(name="employee_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "empid_generator")
-	@SequenceGenerator(name = "empid_generator",initialValue = 2,allocationSize = 10,sequenceName = "emp_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeId;
 	
 	@Column(name="employee_name",nullable = false)
@@ -33,8 +36,19 @@ public class Employee {
 	@Column(name="employee_doj")
 	private Date doj;
 	
-	@Embedded
-	private Address address;
+	/*
+	 * @Embedded private Address address;
+	 */	
+	
+	/*
+	 * @OneToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "address_id") private Address address;
+	 */
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="employee")
+	//@JoinTable(name="employee_address_table",joinColumns = @JoinColumn(name="employee_id"),inverseJoinColumns =@JoinColumn(name="address_id"))
+	private List<Address> address=new ArrayList<Address>();
 	
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -81,25 +95,38 @@ public class Employee {
 
 	public Employee() {
 	}
+		
+	/*
+	 * public Address getAddress() { return address; }
+	 */
 
+	/*
+	 * public void setAddress(Address address) { this.address = address; }
+	 */
+	/*
+	 * public Address getAddress() { return address; }
+	 * 
+	 * public void setAddress(Address address) { this.address = address; }
+	 */
 	
 	
-	
-	public Address getAddress() {
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", employeeemail="
 				+ employeeemail + ", doj=" + doj + ", salary=" + salary + "]";
 	}
+
 	
 	
-	
-	
+
 }

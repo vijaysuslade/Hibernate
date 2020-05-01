@@ -1,11 +1,25 @@
 package com.infotech.entities;
 
+import java.security.Identity;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Embeddable
+@Entity
+@Table(name = "address_table")
 public class Address {
 
+	@Id
+	@Column(name = "address_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer addressid;
 	@Column(name="street_name",length = 50)
 	private String street;
 	@Column(name="city_name",length = 50)
@@ -14,6 +28,11 @@ public class Address {
 	private String state;
 	@Column(name="pincode_name",length = 50)
 	private String pincode;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="employee_id")
+	private Employee employee;
 	
 	public Address() {
 	}
@@ -48,6 +67,22 @@ public class Address {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+  
+	public Integer getAddressid() {
+		return addressid;
+	}
+
+	public void setAddressid(Integer addressid) {
+		this.addressid = addressid;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	@Override

@@ -19,7 +19,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public Employee getEmployeeById(int id) {
@@ -47,7 +46,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		
 	}
-
 	public void deleteById(int id) {
 		Session session;
 		try {

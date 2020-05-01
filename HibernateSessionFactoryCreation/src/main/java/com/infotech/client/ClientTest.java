@@ -22,6 +22,8 @@ public class ClientTest {
       HibernateUtil.closeSessionFactory(); 
 	}
 
+	
+	
 	private static void updateById(EmployeeService employeeService,Double sal) {
 		employeeService.updateEmployeeById(3, sal);	
 	}
@@ -46,13 +48,25 @@ public class ClientTest {
         employee.setDoj(new Date());
         employee.setSalary(10000.00);
         
-        Address addres=new Address();
-        addres.setCity("pune");
-        addres.setPincode("54510");
-        addres.setState("Maharashtra");
-        addres.setStreet("NH4");
+        Address address1=new Address();
+        address1.setCity("pune");
+        address1.setPincode("54510");
+        address1.setState("Maharashtra");
+        address1.setStreet("NH4");
+
+        Address address2=new Address();
+        address2.setCity("Mumbai");
+        address2.setPincode("411044");
+        address2.setState("Maharashtra");
+        address2.setStreet("NH9");
+
+         
+        employee.getAddress().add(address1);
+        employee.getAddress().add(address2);
         
-        employee.setAddress(addres);
+        address1.setEmployee(employee);
+        address2.setEmployee(employee);
+        
 		return employee;
 	}
 }
